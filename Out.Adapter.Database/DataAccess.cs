@@ -9,6 +9,28 @@ public class DataAccess : IDataAccess
     {
         _sqlDataAccess = sqlDataAcess;
     }
+    public async Task<IEnumerable<ShoppingListItem>> GetShoppingListItems()
+    {
+        return await _sqlDataAccess.LoadData<ShoppingListItem, dynamic>(storedProcedure: "[dbo].[spShoppingListItem_GetAll]", new { });
+    }
+    public async Task<ShoppingListItem?> GetShoppingListItem(Guid id)
+    {
+        var result = await _sqlDataAccess.LoadData<ShoppingListItem, Guid>(storedProcedure: "[dbo].[spShoppingListItem_Get]", id);
+        return result?.FirstOrDefault();
+    }
 
-    public Task<IEnumerable<ShoppingListItem>> GetShoppingListItems() => _sqlDataAccess.LoadData<ShoppingListItem, dynamic>(storedProcedure: "[dbo].[spShoppingListItem_GetAll]", new { }, "Default");
+    public async Task CreateShoppingListItem(ShoppingListItem shoppingListItem)
+    {
+        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount });
+    }
+
+    public async Task UpdateShoppingListItem(ShoppingListItem shoppingListItem)
+    {   
+        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Update]", shoppingListItem);
+    }
+
+    public async Task DeleteShoppingListItem(Guid id)
+    {
+        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Delete]", new { id });
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Core.Ports.Out;
+﻿using Core.Models;
+using Core.Ports.In;
 
 namespace handlarn_backend;
 
@@ -6,64 +7,16 @@ public static class API
 {
     public static void ConfigureApi(this WebApplication webApplication)
     {
-        var shoppingItems = new List<ShoppingItem>()
-        {
-            new ShoppingItem(){Id = 1, Text = "Ketchup"},
-            new ShoppingItem(){Id = 2, Text = "Senap"}
-        };
-
-        webApplication.MapGet("/shoppingItem", GetShoppgingItems);
-
-        webApplication.MapGet("/shoppingItem/{id}", (int id) =>
-        {
-            var item = shoppingItems.FirstOrDefault(x => x.Id == id);
-
-            if (item is null)
-            {
-                return Results.NotFound($"Sorry, no such item with id {id}");
-            }
-
-            return Results.Ok(item);
-        });
-
-        webApplication.MapPost("/shoppingItem", (ShoppingItem shoppingItem) =>
-        {
-            shoppingItems.Add(shoppingItem);
-            return shoppingItems;
-        });
-
-        webApplication.MapPut("/shoppingItem/{id}", (ShoppingItem shoppingItem, int id) =>
-        {
-            var item = shoppingItems.FirstOrDefault(x => x.Id == id);
-
-            if (item is null)
-            {
-                return Results.NotFound($"Sorry, no such item with id {id}");
-            }
-
-            item.Text = shoppingItem.Text;
-
-            return Results.Ok(item);
-        });
-
-        webApplication.MapDelete("/shoppingItem/{id}", (int id) =>
-        {
-            var item = shoppingItems.FirstOrDefault(x => x.Id == id);
-
-            if (item is null)
-            {
-                return Results.NotFound($"Sorry, no such item with id {id}");
-            }
-
-            shoppingItems.Remove(item);
-
-            return Results.Ok(shoppingItems);
-        });
+        webApplication.MapGet("/shoppingItem", GetShoppingListItems);
+        webApplication.MapGet("/shoppingItem/{id}", GetShoppingListItem);     
+        webApplication.MapPost("/shoppingItem", CreateShoppingListItem);
+        webApplication.MapPut("/shoppingItem/{id}", UpdateShoppingListItem);
+        webApplication.MapDelete("/shoppingItem/{id}", DeleteShoppingListItem);
     }
 
-    private static async Task<IResult> GetShoppgingItems(IDataAccess dataAccess)
+    private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService)
     {
-        var shoppingItems = await dataAccess.GetShoppingListItems();
+        var shoppingItems = await shoppingListItemService.GetAll();
 
         try
         {    
@@ -74,11 +27,31 @@ public static class API
             return Results.Problem(ex.Message);
         }
     }
-}
 
-public class ShoppingItem
-{
-    public int Id { get; set; }
-    public string Text { get; set; }
-}
+    private static async Task<IResult> GetShoppingListItem(IShoppingListItemService shoppingListItemService, Guid id)
+    {
+        var shoppingItem = await shoppingListItemService.Get(id);
 
+        if (shoppingItem is null)
+        {
+            return Results.NotFound($"Sorry, no such shopping item with id {id}");
+        }
+
+        return Results.Ok(shoppingItem);
+    }
+
+    private static async Task CreateShoppingListItem(IShoppingListItemService shoppingListItemService, ShoppingListItem shoppingItem)
+    {
+        await shoppingListItemService.Create(shoppingItem);   
+    }
+
+    private static async Task UpdateShoppingListItem(IShoppingListItemService shoppingListItemService, ShoppingListItem shoppingItem)
+    {
+        await shoppingListItemService.Update(shoppingItem);
+    }
+
+    private static async Task DeleteShoppingListItem(IShoppingListItemService shoppingListItemService, Guid id)
+    {
+        await shoppingListItemService.Delete(id);
+    }
+}

@@ -63,6 +63,10 @@
   <ItemGroup>
     <Build Include="dbo\Tables\ShoppingListItem.sql" />
     <Build Include="dbo\StoredProcedures\spShoppingListItem_GetAll.sql" />
+    <Build Include="dbo\StoredProcedures\spShoppingListItem_Get.sql" />
+    <Build Include="dbo\StoredProcedures\spShoppingListItem_Create.sql" />
+    <Build Include="dbo\StoredProcedures\spShoppingListItem_Update.sql" />
+    <Build Include="dbo\StoredProcedures\spShoppingListItem_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
