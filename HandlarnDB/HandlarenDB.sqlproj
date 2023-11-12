@@ -73,5 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="HandlarenDBLocalDocker.publish.xml" />
+    <None Include="HandlarenDBAzure.publish.xml" />
   </ItemGroup>
 </Project>

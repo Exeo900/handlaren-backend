@@ -7,11 +7,24 @@ public static class API
 {
     public static void ConfigureApi(this WebApplication webApplication)
     {
+        webApplication.MapGet("/shoppingItemTest", SiteInfo);
         webApplication.MapGet("/shoppingItem", GetShoppingListItems);
         webApplication.MapGet("/shoppingItem/{id}", GetShoppingListItem);     
         webApplication.MapPost("/shoppingItem", CreateShoppingListItem);
         webApplication.MapPut("/shoppingItem/{id}", UpdateShoppingListItem);
         webApplication.MapDelete("/shoppingItem/{id}", DeleteShoppingListItem);
+    }
+
+    private static async Task<IResult> SiteInfo(IConfiguration configuration)
+    {
+        try
+        {
+            return Results.Ok($"Hello World!");
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
+        }
     }
 
     private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService)
