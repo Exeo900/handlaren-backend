@@ -15,6 +15,20 @@ builder.Services.AddScoped<IShoppingListItemService, ShoppingListItemService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", builder =>
+    {
+        builder.WithOrigins(
+                    "https://handlaren-frontend.azurewebsites.net",
+                    "https://localhost:*",
+                    "https://127.0.0.1:*",
+                    "http://localhost:5173",
+                    "http://127.0.0.1:*"
+                );
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +37,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Todo: Specify this
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 
