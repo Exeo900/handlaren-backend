@@ -53,9 +53,24 @@ public static class API
         return Results.Ok(shoppingItem);
     }
 
-    private static async Task CreateShoppingListItem(IShoppingListItemService shoppingListItemService, ShoppingListItem shoppingItem)
+    private static async Task<IResult> CreateShoppingListItem(IShoppingListItemService shoppingListItemService, ShoppingListItem shoppingItem)
     {
-        await shoppingListItemService.Create(shoppingItem);   
+        if (shoppingItem is null)
+        {
+            return Results.BadRequest($"Missing ShoppingListItem Data!");
+        }
+        else if (string.IsNullOrEmpty(shoppingItem.Name))
+        {
+            return Results.BadRequest($"Item must have a name!");
+        }
+        else if (shoppingItem.Amount is null || shoppingItem.Amount < 0)
+        {
+            return Results.BadRequest($"Needs atleast one amount!");
+        }
+
+        await shoppingListItemService.Create(shoppingItem);
+
+        return Results.Ok("Success!");
     }
 
     private static async Task UpdateShoppingListItem(IShoppingListItemService shoppingListItemService, ShoppingListItem shoppingItem)
