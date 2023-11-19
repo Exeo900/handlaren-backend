@@ -63,7 +63,7 @@ public static class API
         {
             return Results.BadRequest($"Item must have a name!");
         }
-        else if (shoppingItem.Amount is null || shoppingItem.Amount < 0)
+        else if (shoppingItem.Amount is null || shoppingItem.Amount < 1)
         {
             return Results.BadRequest($"Needs atleast one amount!");
         }
