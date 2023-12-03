@@ -15,7 +15,7 @@ public static class API
         webApplication.MapDelete("/shoppingItem/{id}", DeleteShoppingListItem);
     }
 
-    private static async Task<IResult> SiteInfo(IConfiguration configuration)
+    private static IResult SiteInfo(IConfiguration configuration)
     {
         try
         {
