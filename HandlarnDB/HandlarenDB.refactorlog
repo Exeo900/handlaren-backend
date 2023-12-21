@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="e60367f3-28c8-4f5c-94b6-74a3a007c14f" ChangeDateTime="12/18/2023 17:28:31">
+    <Property Name="ElementName" Value="[dbo].[ShoppingListItem].[isChecked]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ShoppingListItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsChecked" />
+  </Operation>
+</Operations>

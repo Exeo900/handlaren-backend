@@ -75,4 +75,7 @@
     <None Include="HandlarenDBLocalDocker.publish.xml" />
     <None Include="HandlarenDBAzure.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="HandlarenDB.refactorlog" />
+  </ItemGroup>
 </Project>
