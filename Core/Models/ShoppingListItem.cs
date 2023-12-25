@@ -6,4 +6,5 @@ public class ShoppingListItem
     public int? Amount { get; set; }
     public bool? IsChecked { get; set; }
     public bool IsActive { get; set; }
+    public Guid UserId { get; set; }
 }

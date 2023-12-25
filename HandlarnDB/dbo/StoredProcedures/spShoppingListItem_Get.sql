@@ -1,5 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[spShoppingListItem_Get]
 	@Id uniqueidentifier
 AS
-	SELECT * from ShoppingListItem where Id = @Id 
+	SELECT 
+		[Id],
+		[Name],
+		[Amount],
+		[IsChecked],
+		[IsActive],
+		[User_Id] as [UserId]	
+	FROM ShoppingListItem 
+	WHERE Id = @Id 
 RETURN 0

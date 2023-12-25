@@ -9,9 +9,9 @@ public class DataAccess : IDataAccess
     {
         _sqlDataAccess = sqlDataAcess;
     }
-    public async Task<IEnumerable<ShoppingListItem>> GetShoppingListItems()
+    public async Task<IEnumerable<ShoppingListItem>> GetShoppingListItems(Guid userId)
     {
-        return await _sqlDataAccess.LoadData<ShoppingListItem, dynamic>(storedProcedure: "[dbo].[spShoppingListItem_GetAll]", new { });
+        return await _sqlDataAccess.LoadData<ShoppingListItem, dynamic>(storedProcedure: "[dbo].[spShoppingListItem_GetAll]", new { userId });
     }
     public async Task<ShoppingListItem?> GetShoppingListItem(Guid id)
     {
@@ -21,7 +21,7 @@ public class DataAccess : IDataAccess
 
     public async Task CreateShoppingListItem(ShoppingListItem shoppingListItem)
     {
-        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount });
+        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount, shoppingListItem.UserId });
     }
 
     public async Task UpdateShoppingListItem(ShoppingListItem shoppingListItem)

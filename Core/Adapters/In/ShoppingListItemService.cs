@@ -12,9 +12,9 @@ public class ShoppingListItemService : IShoppingListItemService
         _dataAccess = dataAccess;
     }
 
-    public async Task<IEnumerable<ShoppingListItem>> GetAll()
+    public async Task<IEnumerable<ShoppingListItem>> GetAll(Guid userId)
     {
-        return await _dataAccess.GetShoppingListItems();
+        return await _dataAccess.GetShoppingListItems(userId);
     }
     public async Task<ShoppingListItem?> Get(Guid id)
     {

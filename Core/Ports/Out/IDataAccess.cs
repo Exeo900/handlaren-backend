@@ -4,7 +4,7 @@ namespace Core.Ports.Out;
 
 public interface IDataAccess
 {
-    Task<IEnumerable<ShoppingListItem>> GetShoppingListItems();
+    Task<IEnumerable<ShoppingListItem>> GetShoppingListItems(Guid userId);
     Task<ShoppingListItem?> GetShoppingListItem(Guid id);
     Task CreateShoppingListItem(ShoppingListItem shoppingListItem);
     Task UpdateShoppingListItem(ShoppingListItem shoppingListItem);

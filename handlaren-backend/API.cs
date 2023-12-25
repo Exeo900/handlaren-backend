@@ -27,9 +27,9 @@ public static class API
         }
     }
 
-    private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService)
+    private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService, Guid userId)
     {
-        var shoppingItems = await shoppingListItemService.GetAll();
+        var shoppingItems = await shoppingListItemService.GetAll(userId);
 
         try
         {    
@@ -66,6 +66,10 @@ public static class API
         else if (shoppingItem.Amount is null || shoppingItem.Amount < 1)
         {
             return Results.BadRequest($"Needs atleast one amount!");
+        }
+        else if (shoppingItem.UserId.Equals(Guid.Empty))
+        {
+            return Results.BadRequest($"User id must be valid!");
         }
 
         await shoppingListItemService.Create(shoppingItem);

@@ -9,5 +9,6 @@
     <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
     <AllowUnsafeRowLevelSecurityDataMovement>False</AllowUnsafeRowLevelSecurityDataMovement>
     <AllowIncompatiblePlatform>True</AllowIncompatiblePlatform>
+    <CreateNewDatabase>True</CreateNewDatabase>
   </PropertyGroup>
 </Project>
