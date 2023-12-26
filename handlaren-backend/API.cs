@@ -29,6 +29,11 @@ public static class API
 
     private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService, Guid userId)
     {
+        if (userId.Equals(Guid.Empty))
+        {
+            return Results.BadRequest($"User id cannot be empty!");
+        }
+
         var shoppingItems = await shoppingListItemService.GetAll(userId);
 
         try
@@ -69,7 +74,7 @@ public static class API
         }
         else if (shoppingItem.UserId.Equals(Guid.Empty))
         {
-            return Results.BadRequest($"User id must be valid!");
+            return Results.BadRequest($"User id cannot be empty!");
         }
 
         await shoppingListItemService.Create(shoppingItem);
