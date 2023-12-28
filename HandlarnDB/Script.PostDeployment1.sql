@@ -10,7 +10,7 @@ begin
 	(Id, Name) 
 	values 
 	(@PontusId, 'Pontus'), 
-	(@IngerOchKennetId, 'IngerOchKennet')
+	(@IngerOchKennetId, 'Inger och Kennet')
 end
 
 

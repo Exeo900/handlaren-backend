@@ -13,6 +13,8 @@ public static class API
         webApplication.MapPost("/shoppingItem", CreateShoppingListItem);
         webApplication.MapPut("/shoppingItem/{id}", UpdateShoppingListItem);
         webApplication.MapDelete("/shoppingItem/{id}", DeleteShoppingListItem);
+        webApplication.MapGet("/userData/{userid}", GetUserData);
+        webApplication.MapGet("/userData/", GetUsersData);
     }
 
     private static IResult SiteInfo(IConfiguration configuration)
@@ -27,7 +29,7 @@ public static class API
         }
     }
 
-    private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService, Guid userId)
+    private static async Task<IResult> GetShoppingListItems(IShoppingListItemService shoppingListItemService, Guid? userId)
     {
         if (userId.Equals(Guid.Empty))
         {
@@ -90,5 +92,29 @@ public static class API
     private static async Task DeleteShoppingListItem(IShoppingListItemService shoppingListItemService, Guid id)
     {
         await shoppingListItemService.Delete(id);
+    }
+
+    private static async Task<IResult> GetUsersData(IUserDataService userDataService)
+    {
+        var users = await userDataService.GetUsers();
+
+        return Results.Ok(users);
+    }
+
+    private static async Task<IResult> GetUserData(IUserDataService userDataService, Guid userId)
+    {
+        if (userId.Equals(Guid.Empty))
+        {
+            return Results.BadRequest($"User id cannot be empty!");
+        }
+
+        var user = await userDataService.GetUser(userId);
+
+        if (user == null)
+        {
+            return Results.BadRequest($"User not found with id {userId}");
+        }
+
+        return Results.Ok(user);
     }
 }

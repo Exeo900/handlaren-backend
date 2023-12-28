@@ -10,5 +10,5 @@ AS
 		[User_Id] as [UserId]
 	FROM 
 		ShoppingListItem 
-	WHERE User_Id = @UserId 
+	WHERE (@UserId IS NULL OR User_Id = @UserId);  
 RETURN 0

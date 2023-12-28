@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ISqlDataAcess, SqlDataAcess>();
 builder.Services.AddScoped<IDataAccess, DataAccess>();
 builder.Services.AddScoped<IShoppingListItemService, ShoppingListItemService>();
+builder.Services.AddScoped<IUserDataService, UserDataService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

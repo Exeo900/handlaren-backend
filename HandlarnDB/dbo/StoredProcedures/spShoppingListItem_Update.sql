@@ -2,10 +2,11 @@
 	@Id uniqueidentifier,
 	@Name NVARCHAR(255),
 	@Amount INTEGER,
-	@isChecked bit,
-	@isActive bit
+	@IsChecked bit,
+	@IsActive bit,
+	@UserId uniqueidentifier
 AS
 	UPDATE ShoppingListItem
-	SET [Name] = @Name, [Amount] = @Amount, [IsChecked] = @isChecked, [IsActive] = @isActive
+	SET [Name] = @Name, [Amount] = @Amount, [IsChecked] = @IsChecked, [IsActive] = @IsActive, [User_Id] = @UserId
 	WHERE Id = @Id
 RETURN 0
