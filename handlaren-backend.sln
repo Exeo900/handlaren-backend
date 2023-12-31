@@ -9,9 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Out.Adapter.Database", "Out.Adapter.Database\Out.Adapter.Database.csproj", "{C63C8333-8D10-496C-8E62-41B7BC7442D0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{E7767D00-6917-4A12-9E70-0E0E3C98BA3D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "handlaren-backend", "handlaren-backend\handlaren-backend.csproj", "{C6DBBAE8-D216-4D2B-8325-3B09FC1EB1B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F3A6FD0D-8F2D-48F8-B29E-503A327EB720}"
+	ProjectSection(SolutionItems) = preProject
+		startupLocalEnvironment.ps1 = startupLocalEnvironment.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A6D8511-ACA3-4234-8F2E-93C2467C7107}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{8A059612-2E29-412A-97B6-558FAE7F4F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A059612-2E29-412A-97B6-558FAE7F4F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
