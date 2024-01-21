@@ -7,7 +7,7 @@ public static class API
 {
     public static void ConfigureApi(this WebApplication webApplication)
     {
-        webApplication.MapGet("/shoppingItemTest", SiteInfo);
+        webApplication.MapGet("/siteInfo", SiteInfo);
         webApplication.MapGet("/shoppingItem", GetShoppingListItems);
         webApplication.MapGet("/shoppingItem/{id}", GetShoppingListItem);     
         webApplication.MapPost("/shoppingItem", CreateShoppingListItem);
@@ -17,11 +17,11 @@ public static class API
         webApplication.MapGet("/userData/", GetUsersData);
     }
 
-    private static IResult SiteInfo(IConfiguration configuration)
+    private static IResult SiteInfo(IConfiguration configuration, IWebHostEnvironment env)
     {
         try
         {
-            return Results.Ok($"Hello World!");
+            return Results.Ok($"Hello World! Environment: {env.EnvironmentName}");
         }
         catch (Exception ex)
         {

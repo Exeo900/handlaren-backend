@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=yourStrong(!)Password
+    ports:
+      - "1433:1433"
+    networks:
+      - handlaren-network
+
+  handlaren-frontend:
+    image: exdeo/handlaren-frontend
+    ports:
+      - "8001:8001"
+    networks:
+      - handlaren-network
+
+  handlaren-backend:
+    image: exdeo/handlaren-backend
+    ports:
+      - "8181:8181"
+    networks:
+      - handlaren-network
+
+networks:
+  handlaren-network:
+    driver: bridge

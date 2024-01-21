@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
                     "https://localhost:*",
                     "https://127.0.0.1:*",
                     "http://localhost:5173",
-                    "http://127.0.0.1:*"
+                    "http://127.0.0.1:*",
+                    "http://192.168.50.14:8001"
                 )
         .AllowAnyMethod()
         .AllowAnyHeader();
@@ -41,7 +42,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Todo: Specify this
 app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
