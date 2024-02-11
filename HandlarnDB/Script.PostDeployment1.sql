@@ -16,11 +16,11 @@ end
 
 if not exists (select 1 from dbo.ShoppingListItem)
 begin 
-	insert into dbo.ShoppingListItem (Name, Amount, IsChecked, IsActive, [User_Id]) 
+	insert into dbo.ShoppingListItem (Name, Amount, MeasurementTypeId, IsChecked, IsActive, [User_Id]) 
 	values 
-	('Bröd', '1', 1, 1, @PontusId), 
-	('Mjölk', '1', 1, 1, @PontusId), 
-	('Mobiltelefon', '1', 1, 0, @PontusId),
-	('Köttfärs', '1', 0, 1, @IngerOchKennetId),
-	('Smör', '1', 0, 1, @IngerOchKennetId)
+	('Bröd', '1', 0, 1, 1, @PontusId), 
+	('Mjölk', '1', 0, 1, 1, @PontusId), 
+	('Mobiltelefon', '1', 0, 1, 0, @PontusId),
+	('Köttfärs', '1', 0, 0, 1, @IngerOchKennetId),
+	('Smör', '1', 0, 0, 1, @IngerOchKennetId)
 end

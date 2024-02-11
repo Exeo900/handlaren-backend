@@ -5,6 +5,7 @@ AS
 		[Id],
 		[Name],
 		[Amount],
+		[MeasurementTypeId],
 		[IsChecked],
 		[IsActive],
 		[User_Id] as [UserId]	

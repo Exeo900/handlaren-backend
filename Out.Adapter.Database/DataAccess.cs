@@ -22,7 +22,7 @@ public class DataAccess : IDataAccess
 
     public async Task CreateShoppingListItem(ShoppingListItem shoppingListItem)
     {
-        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount, shoppingListItem.UserId });
+        await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount, shoppingListItem.MeasurementTypeId, shoppingListItem.UserId });
     }
 
     public async Task UpdateShoppingListItem(ShoppingListItem shoppingListItem)

@@ -1,15 +1,27 @@
 version: '3.8'
 
 services:
-  mssql-server:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=yourStrong(!)Password
+
+ backend:
+    image: exdeo/exdeostuff:admintoollite
     ports:
-      - "1433:1433"
+      - "5001:8080"
     networks:
-      - handlaren-network
+      - adminnetwork
+
+ frontend:
+    image: exdeo/admintoolsfrontend:frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - adminnetwork
+
+  database:
+    image: exdeo/admintoolmysql
+    networks:
+      - adminnetwork
+    volumes:
+      - mysqlvolume:/var/lib/mysql
 
   handlaren-frontend:
     image: exdeo/handlaren-frontend
