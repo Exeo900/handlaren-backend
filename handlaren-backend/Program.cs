@@ -2,9 +2,6 @@ using Core.Adapters.In;
 using Core.Ports.In;
 using Core.Ports.Out;
 using handlarn_backend;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Out.Adapter.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,18 +32,6 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader();
     });
 });
-
-// Configure azure key vault
-if (!builder.Environment.IsDevelopment())
-{
-    var keyVaultEndpoint = builder.Configuration["KeyVault:Endpoint"];
-
-    if (!string.IsNullOrEmpty(keyVaultEndpoint))
-    {
-        var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
-        builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
-    }
-}
 
 var app = builder.Build();
 
