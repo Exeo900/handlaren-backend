@@ -25,6 +25,15 @@ public class DataAccess : IDataAccess
         await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Create]", new { shoppingListItem.Name, shoppingListItem.Amount, shoppingListItem.MeasurementTypeId, shoppingListItem.UserId });
     }
 
+    public async Task CreateShoppingListItems(IEnumerable<ShoppingListItem> shoppingListItems)
+    {
+        // TODO: Create bulk sp instead, insert them all in db directly at the same time.
+        foreach (var item in shoppingListItems)
+        {
+            await CreateShoppingListItem(item);
+        }
+    }
+
     public async Task UpdateShoppingListItem(ShoppingListItem shoppingListItem)
     {   
         await _sqlDataAccess.SaveData(storedProcedure: "[dbo].[spShoppingListItem_Update]", shoppingListItem);

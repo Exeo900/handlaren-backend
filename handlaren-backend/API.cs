@@ -1,5 +1,6 @@
 ﻿using Core.Models;
 using Core.Ports.In;
+using Microsoft.AspNetCore.Mvc;
 
 namespace handlarn_backend;
 
@@ -9,8 +10,9 @@ public static class API
     {
         webApplication.MapGet("/siteInfo", SiteInfo);
         webApplication.MapGet("/shoppingItem", GetShoppingListItems);
-        webApplication.MapGet("/shoppingItem/{id}", GetShoppingListItem);     
+        webApplication.MapGet("/shoppingItem/{id}", GetShoppingListItem);
         webApplication.MapPost("/shoppingItem", CreateShoppingListItem);
+        webApplication.MapPost("/shoppingItemBulk", CreateShoppingListItemBulk);
         webApplication.MapPut("/shoppingItem/{id}", UpdateShoppingListItem);
         webApplication.MapDelete("/shoppingItem/{id}", DeleteShoppingListItem);
         webApplication.MapGet("/userData/{userid}", GetUserData);
@@ -39,7 +41,7 @@ public static class API
         var shoppingItems = await shoppingListItemService.GetAll(userId);
 
         try
-        {    
+        {
             return Results.Ok(shoppingItems);
         }
         catch (Exception ex)
@@ -80,6 +82,18 @@ public static class API
         }
 
         await shoppingListItemService.Create(shoppingItem);
+
+        return Results.Ok("Success!");
+    }
+
+    private static async Task<IResult> CreateShoppingListItemBulk(IShoppingListItemService shoppingListItemService, [FromBody] IEnumerable<ShoppingListItem> shoppingItems)
+    {
+        if (shoppingItems is null || !shoppingItems.Any())
+        {
+            return Results.BadRequest($"Missing ShoppingListItems Bulk Data!");
+        }
+
+        await shoppingListItemService.Create(shoppingItems);
 
         return Results.Ok("Success!");
     }

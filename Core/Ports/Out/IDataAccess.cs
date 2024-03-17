@@ -7,6 +7,7 @@ public interface IDataAccess
     Task<IEnumerable<ShoppingListItem>> GetShoppingListItems(Guid? userId);
     Task<ShoppingListItem?> GetShoppingListItem(Guid id);
     Task CreateShoppingListItem(ShoppingListItem shoppingListItem);
+    Task CreateShoppingListItems(IEnumerable<ShoppingListItem> shoppingListItems);
     Task UpdateShoppingListItem(ShoppingListItem shoppingListItem);
     Task DeleteShoppingListItem(Guid id);
     Task<UserData?> GetUserData(Guid userId);

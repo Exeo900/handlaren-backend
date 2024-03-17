@@ -26,6 +26,11 @@ public class ShoppingListItemService : IShoppingListItemService
         await _dataAccess.CreateShoppingListItem(shoppingListItem);
     }
 
+    public async Task Create(IEnumerable<ShoppingListItem> shoppingListItems)
+    {
+        await _dataAccess.CreateShoppingListItems(shoppingListItems);
+    }
+
     public async Task Update(ShoppingListItem shoppingListItem)
     {
         await _dataAccess.UpdateShoppingListItem(shoppingListItem);
